@@ -45,7 +45,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-2 w-full max-w-[280px]">
             <RainbowButton href="#services">View My Services</RainbowButton>
           </div>
         </motion.div>
@@ -101,7 +101,7 @@ export default function HeroSection() {
             <ProjectCard />
           </div>
 
-          <div className="w-full max-w-xs">
+          <div className="w-full max-w-[280px]">
             <RainbowButton href="#contact">Book a Consultation</RainbowButton>
           </div>
         </motion.div>

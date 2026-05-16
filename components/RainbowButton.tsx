@@ -11,12 +11,13 @@ interface RainbowButtonProps {
 
 export default function RainbowButton({ children, href, onClick, className = "" }: RainbowButtonProps) {
   const inner = (
-    <span className="relative z-10 flex items-center justify-center w-full h-full px-8 py-4 bg-[#0d0d0d] rounded-[10px] text-white font-bold text-[11px] tracking-[0.2em] uppercase transition-colors group-hover:bg-[#161616]">
+    <span className="relative z-10 flex items-center justify-center w-full h-full px-8 py-3.5 bg-[#0d0d0d] rounded-[10px] text-white font-bold text-[10px] tracking-[0.22em] uppercase transition-colors group-hover:bg-[#161616]">
       {children}
     </span>
   );
 
-  const base = `group relative p-[2px] rounded-xl overflow-hidden rainbow-border-btn ${className}`;
+  // p-[2px] = 2px rainbow border; rounded-[12px] outer + rounded-[10px] inner = pixel-perfect edge
+  const base = `group relative p-[2px] rounded-[12px] overflow-hidden rainbow-border-btn ${className}`;
 
   if (href) {
     return (
