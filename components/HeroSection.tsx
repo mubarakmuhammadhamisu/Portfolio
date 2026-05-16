@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Sparkles, Cpu } from "lucide-react";
+import { Sparkles, Cpu, ArrowUpRight, Phone } from "lucide-react";
 import RainbowButton from "./RainbowButton";
 import ProjectCard from "./ProjectCard";
 
@@ -46,7 +46,9 @@ export default function HeroSection() {
           </div>
 
           <div className="pt-2 w-full max-w-[280px]">
-            <RainbowButton href="#services">View My Services</RainbowButton>
+            <RainbowButton href="#services" icon={<ArrowUpRight className="w-3.5 h-3.5" />}>
+              View My Services
+            </RainbowButton>
           </div>
         </motion.div>
 
@@ -102,7 +104,9 @@ export default function HeroSection() {
           </div>
 
           <div className="w-full max-w-[280px]">
-            <RainbowButton href="#contact">Book a Consultation</RainbowButton>
+            <RainbowButton href="#contact" icon={<Phone className="w-3 h-3" />}>
+              Book a Consultation
+            </RainbowButton>
           </div>
         </motion.div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Check, Zap } from "lucide-react";
+import { Check, Zap, ArrowUpRight } from "lucide-react";
 import RainbowButton from "./RainbowButton";
 
 const PLANS = [
@@ -138,7 +138,9 @@ export default function PricingSection() {
 
               {/* CTA */}
               <div className="pt-2">
-                <RainbowButton href={plan.href}>{plan.cta}</RainbowButton>
+                <RainbowButton href={plan.href} icon={<ArrowUpRight className="w-3.5 h-3.5" />}>
+                  {plan.cta}
+                </RainbowButton>
               </div>
             </motion.div>
           ))}

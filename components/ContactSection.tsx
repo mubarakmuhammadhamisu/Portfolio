@@ -127,7 +127,9 @@ export default function ContactSection() {
                 </div>
 
                 <div className="max-w-[200px]">
-                  <RainbowButton onClick={handleSubmit}>Send Message</RainbowButton>
+                  <RainbowButton onClick={handleSubmit} icon={<Send className="w-3 h-3" />}>
+                    Send Message
+                  </RainbowButton>
                 </div>
               </>
             )}
