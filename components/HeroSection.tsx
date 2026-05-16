@@ -7,7 +7,7 @@ import ProjectCard from "./ProjectCard";
 
 export default function HeroSection() {
   return (
-    <section className="relative container mx-auto px-6 min-h-screen flex items-center justify-center pt-24 pb-12">
+    <section className="relative container mx-auto px-6 min-h-[680px] flex items-center justify-center pt-24 pb-12">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 xl:gap-16 items-center w-full max-w-7xl">
 
         {/* ── LEFT: Text Info ── */}
