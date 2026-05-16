@@ -10,13 +10,13 @@ const CONTACT_LINKS = [
     icon: Mail,
     label: "Email",
     value: "mubarak@example.com",
-    href: "mailto:mubarak@example.com",
+    href: "mailto:hamisumubarak447@gmail.com",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "+234 800 000 0000",
-    href: "https://wa.me/2348000000000",
+    value: "+24 9166082367",
+    href: "https://wa.me/2349166082367 ",
   },
   {
     icon: MapPin,
