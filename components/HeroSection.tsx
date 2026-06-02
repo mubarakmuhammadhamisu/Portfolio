@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Sparkles, Cpu, ArrowUpRight, Phone } from "lucide-react";
 import RainbowButton from "./RainbowButton";
 import ProjectCard from "./ProjectCard";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -72,7 +73,7 @@ export default function HeroSection() {
               boxShadow: "0 0 60px rgba(80,100,255,0.15), inset 0 0 40px rgba(0,0,0,0.4)",
             }}
           >
-            <img
+            <Image
               src="/me.avif"
               alt="Mubarak"
               className="w-full h-full object-cover object-top scale-105"
