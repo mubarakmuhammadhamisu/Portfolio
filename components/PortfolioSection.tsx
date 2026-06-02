@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image;
 import { ExternalLink, ArrowUpRight } from "lucide-react";
 
 const PROJECTS = [
@@ -92,7 +93,7 @@ export default function PortfolioSection() {
             >
               {/* Image */}
               <div className="relative aspect-[16/10] overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"

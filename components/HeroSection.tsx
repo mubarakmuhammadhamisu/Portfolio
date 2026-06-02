@@ -77,6 +77,7 @@ export default function HeroSection() {
               src="/me.avif"
               alt="Mubarak"
               className="w-full h-full object-cover object-top scale-105"
+              priority={true}
             />
             {/* Subtle vignette */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
