@@ -73,7 +73,7 @@ export default function HeroSection() {
             }}
           >
             <img
-              src="/profile.webp"
+              src="/me.avif"
               alt="Mubarak"
               className="w-full h-full object-cover object-top scale-105"
             />
