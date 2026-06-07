@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { useState, useCallback } from "react";
 
@@ -69,7 +70,7 @@ export default function ProjectCard() {
 
       {/* Image */}
       <div className="relative aspect-[16/10] bg-black/40 rounded-xl overflow-hidden border border-white/5 group">
-        <img
+        <Image
           src={project.image}
           className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
           alt={`${project.title} - ${project.label}`}
