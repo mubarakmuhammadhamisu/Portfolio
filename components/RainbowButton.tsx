@@ -8,8 +8,13 @@ interface RainbowButtonProps {
   href?: string;
   onClick?: () => void;
   className?: string;
-  /** primary = full glow (default). ghost = dimmer, for secondary actions. */
   variant?: "primary" | "ghost";
+  /** Accessible label — falls back to visible text */
+  ariaLabel?: string;
+  /** Type for <button> element */
+  type?: "button" | "submit" | "reset";
+  /** Disabled state */
+  disabled?: boolean;
 }
 
 export default function RainbowButton({
@@ -19,6 +24,9 @@ export default function RainbowButton({
   onClick,
   className = "",
   variant = "primary",
+  ariaLabel,
+  type = "button",
+  disabled = false,
 }: RainbowButtonProps) {
   const inner = (
     <span
@@ -32,7 +40,10 @@ export default function RainbowButton({
     >
       {children}
       {icon && (
-        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full border border-white/20 text-white/80 shrink-0 text-sm">
+        <span
+          className="inline-flex items-center justify-center w-7 h-7 rounded-full border border-white/20 text-white/80 shrink-0 text-sm"
+          aria-hidden="true"
+        >
           {icon}
         </span>
       )}
@@ -44,14 +55,34 @@ export default function RainbowButton({
     h-[54px] rounded-full overflow-hidden
     rainbow-pill-btn
     ${variant === "ghost" ? "opacity-70 hover:opacity-100" : ""}
-    transition-all duration-200 hover:-translate-y-[2px]
+    ${disabled ? "opacity-40 cursor-not-allowed pointer-events-none" : "transition-all duration-200 hover:-translate-y-[2px] active:translate-y-0"}
     w-full
     ${className}
   `;
 
-  if (href) {
-    return <a href={href} className={base}>{inner}</a>;
+  if (href && !disabled) {
+    return (
+      <a
+        href={href}
+        className={base}
+        aria-label={ariaLabel}
+        role="button"
+      >
+        {inner}
+      </a>
+    );
   }
 
-  return <button onClick={onClick} className={base}>{inner}</button>;
+  return (
+    <button
+      onClick={onClick}
+      className={base}
+      aria-label={ariaLabel}
+      type={type}
+      disabled={disabled}
+      aria-disabled={disabled}
+    >
+      {inner}
+    </button>
+  );
 }

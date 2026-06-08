@@ -40,7 +40,11 @@ const TESTIMONIALS = [
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="container mx-auto px-6 py-20">
+    <section
+      id="testimonials"
+      aria-labelledby="testimonials-heading"
+      className="container mx-auto px-6 py-20"
+    >
       <div className="space-y-14">
 
         {/* Header */}
@@ -51,20 +55,26 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center space-y-4"
         >
-          <span className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase">
+          <span className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase" aria-hidden="true">
             Client Feedback
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-semibold">
+          <h2
+            id="testimonials-heading"
+            className="text-4xl md:text-5xl font-display font-semibold"
+          >
             Testimonials
           </h2>
-          <div className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500" />
+          <div className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500" aria-hidden="true" />
         </motion.div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <ul
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 list-none p-0"
+          aria-label="Client testimonials"
+        >
           {TESTIMONIALS.map((t, i) => (
-            <motion.div
-              key={i}
+            <motion.li
+              key={t.name}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -72,30 +82,43 @@ export default function TestimonialsSection() {
               className="glass rounded-2xl p-7 hover:bg-white/[0.07] transition-all duration-300 flex flex-col gap-5"
             >
               {/* Stars */}
-              <div className="flex gap-1">
+              <div
+                className="flex gap-1"
+                aria-label={`Rating: ${t.rating} out of 5 stars`}
+                role="img"
+              >
                 {Array.from({ length: t.rating }).map((_, s) => (
-                  <Star key={s} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                  <Star
+                    key={s}
+                    className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"
+                    aria-hidden="true"
+                  />
                 ))}
               </div>
 
               {/* Quote */}
-              <p className="text-white/60 text-sm leading-relaxed flex-1">
+              <blockquote className="text-white/60 text-sm leading-relaxed flex-1">
                 &ldquo;{t.quote}&rdquo;
-              </p>
+              </blockquote>
 
               {/* Author */}
-              <div className="flex items-center gap-3 pt-1 border-t border-white/[0.06]">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/60">
+              <footer className="flex items-center gap-3 pt-1 border-t border-white/[0.06]">
+                <div
+                  className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/60"
+                  aria-hidden="true"
+                >
                   {t.avatar}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white/90">{t.name}</p>
+                  <cite className="not-italic text-sm font-semibold text-white/90 block">
+                    {t.name}
+                  </cite>
                   <p className="text-[10px] text-white/30">{t.role}</p>
                 </div>
-              </div>
-            </motion.div>
+              </footer>
+            </motion.li>
           ))}
-        </div>
+        </ul>
 
       </div>
     </section>

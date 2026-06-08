@@ -2,23 +2,26 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const PROJECTS = [
   {
     title: "Local Bakery",
     label: "Mobile App",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
   },
   {
     title: "Startup Lab",
     label: "Landing Page",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1200&auto=format&fit=crop",
   },
   {
     title: "TITECX",
     label: "E-Learning Platform",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
@@ -34,51 +37,75 @@ export default function ProjectCard() {
     setIndex((i) => (i + 1) % PROJECTS.length);
   }, []);
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); handlePrevious(); }
+      if (e.key === "ArrowRight") { e.preventDefault(); handleNext(); }
+    },
+    [handlePrevious, handleNext]
+  );
+
+  // Auto-cycle (pauses on reduced-motion pref)
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
+    const id = setInterval(handleNext, 4000);
+    return () => clearInterval(id);
+  }, [handleNext]);
+
   return (
-    <div 
+    <div
       className="w-full glass rounded-2xl p-5 relative hover:ring-1 hover:ring-white/20 transition-all overflow-hidden"
       role="region"
       aria-label="Featured project carousel"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <span 
+        <span
           className="text-[9px] font-bold tracking-[0.25em] text-white/40 uppercase"
           aria-live="polite"
-          aria-label={`Project ${index + 1} of ${PROJECTS.length}`}
+          aria-atomic="true"
         >
-          Projects: {PROJECTS.length}+ Live
+          Project {index + 1} of {PROJECTS.length}
         </span>
-        <div 
+        <div
           className="flex gap-1"
           role="tablist"
-          aria-label="Project selection indicators"
+          aria-label="Project indicators"
         >
-          {PROJECTS.map((_, i) => (
-            <div
-              key={i}
-              className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                i === index ? "bg-white/60" : "bg-white/15"
-              }`}
+          {PROJECTS.map((p, i) => (
+            <button
+              key={p.title}
               role="tab"
               aria-selected={i === index}
-              aria-label={`Project ${i + 1}`}
+              aria-label={`Go to project: ${p.title}`}
+              onClick={() => setIndex(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-colors focus-visible:outline-1 focus-visible:outline-indigo-400 ${
+                i === index ? "bg-white/60" : "bg-white/15"
+              }`}
             />
           ))}
         </div>
       </div>
 
       {/* Image */}
-      <div className="relative aspect-[16/10] bg-black/40 rounded-xl overflow-hidden border border-white/5 group">
+      <div
+        className="relative aspect-[16/10] bg-black/40 rounded-xl overflow-hidden border border-white/5 group"
+        aria-label={`${project.title} — ${project.label}`}
+      >
         <Image
           src={project.image}
-          className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
-          alt={`${project.title} - ${project.label}`}
+          className="object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+          alt={`Screenshot of ${project.title} — ${project.label}`}
+          fill
+          sizes="(max-width: 768px) 100vw, 320px"
           loading="lazy"
-          decoding="async"
         />
-        <div 
-          className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" 
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
           aria-hidden="true"
         />
         <div className="absolute bottom-0 left-0 p-4">
@@ -89,32 +116,30 @@ export default function ProjectCard() {
 
       {/* Controls */}
       <div className="flex items-center justify-between mt-4">
-        <div className="flex gap-2" role="group" aria-label="Navigation controls">
+        <div className="flex gap-2" role="group" aria-label="Carousel controls">
           <button
             onClick={handlePrevious}
-            className="p-2 rounded-full glass hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40"
+            className="p-2 rounded-full glass hover:bg-white/10 transition-colors"
             aria-label="View previous project"
-            title="Previous project"
           >
             <ChevronLeft className="w-3 h-3" aria-hidden="true" />
           </button>
           <button
             onClick={handleNext}
-            className="p-2 rounded-full glass hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40"
+            className="p-2 rounded-full glass hover:bg-white/10 transition-colors"
             aria-label="View next project"
-            title="Next project"
           >
             <ChevronRight className="w-3 h-3" aria-hidden="true" />
           </button>
         </div>
-        <a 
-          href="#contact" 
-          className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase text-white/40 hover:text-white transition-colors group focus:outline-none focus:ring-2 focus:ring-white/40 px-3 py-1.5 rounded"
-          aria-label={`View ${project.title} case study`}
+        <a
+          href="#portfolio"
+          className="flex items-center gap-1.5 text-[9px] font-bold tracking-widest uppercase text-white/40 hover:text-white transition-colors group px-3 py-1.5 rounded"
+          aria-label={`View ${project.title} case study in portfolio`}
         >
           Case Study{" "}
-          <ExternalLink 
-            className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" 
+          <ExternalLink
+            className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
             aria-hidden="true"
           />
         </a>

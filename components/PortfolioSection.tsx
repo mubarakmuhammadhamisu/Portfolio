@@ -57,10 +57,10 @@ const PROJECTS = [
 
 export default function PortfolioSection() {
   return (
-    <section 
-      id="portfolio" 
+    <section
+      id="portfolio"
+      aria-labelledby="portfolio-heading"
       className="container mx-auto px-6 py-20"
-      aria-label="Portfolio section showcasing selected projects"
     >
       <div className="space-y-14">
 
@@ -72,58 +72,53 @@ export default function PortfolioSection() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center text-center space-y-4"
         >
-          <span 
-            className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase"
-            aria-label="Section badge: Selected Work"
-          >
+          <span className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase" aria-hidden="true">
             Selected Work
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-semibold">
+          <h2
+            id="portfolio-heading"
+            className="text-4xl md:text-5xl font-display font-semibold"
+          >
             Portfolio
           </h2>
-          <div 
-            className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500" 
-            aria-hidden="true"
-          />
+          <div className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500" aria-hidden="true" />
           <p className="text-white/40 text-sm max-w-md leading-relaxed">
             Real projects built for real businesses — from Lagos to Abuja.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-          role="list"
+        <ul
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0"
+          aria-label="Portfolio projects"
         >
           {PROJECTS.map((project, i) => (
-            <motion.div
-              key={`project-${project.title}`}
+            <motion.li
+              key={project.title}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.55 }}
               className="glass rounded-2xl overflow-hidden group hover:ring-1 hover:ring-white/15 transition-all duration-300"
-              role="listitem"
             >
               {/* Image */}
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
                   src={project.image}
-                  alt={`${project.title} - ${project.category}`}
-                  width={1200}
-                  height={750}
+                  alt={`${project.title} — ${project.category} project screenshot`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   loading="lazy"
-                  className="w-full h-full object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"
+                  className="object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"
                 />
-                <div 
-                  className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" 
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"
                   aria-hidden="true"
                 />
 
                 {/* Category badge */}
-                <span 
+                <span
                   className="absolute top-3 left-3 text-[9px] font-bold tracking-[0.2em] uppercase bg-white/10 backdrop-blur-sm border border-white/10 px-2.5 py-1 rounded-full text-white/70"
-                  aria-label={`Project category: ${project.category}`}
                 >
                   {project.category}
                 </span>
@@ -131,9 +126,8 @@ export default function PortfolioSection() {
                 {/* Live link */}
                 <a
                   href={project.live}
-                  className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/20 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/40"
-                  aria-label={`View ${project.title} live project`}
-                  title={`View ${project.title} live`}
+                  className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/20 focus:opacity-100"
+                  aria-label={`View ${project.title} live — opens in current tab`}
                 >
                   <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>
@@ -145,35 +139,34 @@ export default function PortfolioSection() {
                 <p className="text-white/60 text-xs leading-relaxed">{project.desc}</p>
 
                 {/* Tags */}
-                <div 
+                <div
                   className="flex flex-wrap gap-1.5 pt-1"
-                  aria-label={`Technologies used: ${project.tags.join(', ')}`}
+                  aria-label={`Technologies: ${project.tags.join(", ")}`}
                 >
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
                       className="text-[9px] font-bold tracking-wider uppercase text-blue-400/70 border border-blue-400/20 px-2 py-0.5 rounded-full"
-                      aria-label={`Technology: ${tag}`}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
 
         {/* Bottom CTA */}
         <div className="flex justify-center">
           <a
             href="#contact"
-            className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-white/40 hover:text-white transition-colors group focus:outline-none focus:ring-2 focus:ring-white/40 px-4 py-2 rounded-lg"
-            aria-label="Navigate to contact section to discuss your project"
+            className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-white/40 hover:text-white transition-colors group px-4 py-2 rounded-lg"
+            aria-label="Go to contact section to discuss your project"
           >
             Have a project in mind?
-            <ExternalLink 
-              className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" 
+            <ExternalLink
+              className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
               aria-hidden="true"
             />
           </a>

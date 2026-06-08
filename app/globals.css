@@ -12,6 +12,45 @@
     background-color: #080808;
   }
   * { box-sizing: border-box; }
+
+  /* Focus ring — visible only for keyboard nav, not mouse clicks */
+  :focus-visible {
+    outline: 2px solid rgba(99, 102, 241, 0.8);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Accessible motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ── Screen-reader only utility ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.focus\:not-sr-only:focus {
+  position: fixed;
+  width: auto;
+  height: auto;
+  padding: revert;
+  margin: revert;
+  overflow: revert;
+  clip: revert;
+  white-space: revert;
 }
 
 .glass {
@@ -37,10 +76,15 @@
   100% { filter: hue-rotate(360deg); }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .rainbow-pill-btn {
+    animation: spin-angle 4s linear infinite, hue-cycle 6s linear infinite;
+  }
+}
+
 .rainbow-pill-btn {
   --angle: 0deg;
 
-  /* dark fill in padding-box, animated conic border in border-box */
   background:
     linear-gradient(150deg, rgba(18,15,30,0.97) 0%, rgba(7,7,12,0.99) 100%) padding-box,
     conic-gradient(from var(--angle),
@@ -55,14 +99,18 @@
     inset 0 0 0 1px rgba(255,255,255,0.035),
     0 0 18px rgba(192,132,252,0.18),
     0 0 36px rgba(56,189,248,0.07);
-
-  animation: spin-angle 4s linear infinite, hue-cycle 6s linear infinite;
 }
 
 .rainbow-pill-btn:hover {
   box-shadow:
     0 0 28px rgba(192,132,252,0.42),
     0 0 55px rgba(56,189,248,0.18);
+}
+
+/* High-contrast focus state for rainbow button */
+.rainbow-pill-btn:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 3px;
 }
 
 /* Lens-flare gleam overlay */
@@ -87,3 +135,12 @@
     linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
   background-size: 48px 48px;
 }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.16); }
+
+/* ── Selection ── */
+::selection { background: rgba(129,140,248,0.25); color: white; }

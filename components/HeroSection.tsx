@@ -8,7 +8,11 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="relative container mx-auto px-2 min-h-[680px] flex items-center justify-center pt-24 pb-12">
+    <section
+      id="about"
+      aria-labelledby="hero-heading"
+      className="relative container mx-auto px-2 min-h-[680px] flex items-center justify-center pt-24 pb-12"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 xl:gap-16 items-center w-full max-w-7xl">
 
         {/* ── LEFT: Text Info ── */}
@@ -19,7 +23,10 @@ export default function HeroSection() {
           className="space-y-7 order-2 lg:order-1"
         >
           <div className="space-y-2">
-            <h1 className="text-[clamp(3.5rem,8vw,6rem)] font-display font-bold tracking-tighter leading-none">
+            <h1
+              id="hero-heading"
+              className="text-[clamp(3.5rem,8vw,6rem)] font-display font-bold tracking-tighter leading-none"
+            >
               MUBARAK
             </h1>
             <div className="space-y-0.5">
@@ -33,8 +40,8 @@ export default function HeroSection() {
           </div>
 
           <p className="text-white/50 max-w-[340px] leading-relaxed text-sm italic">
-            "Crafting exceptional digital experiences for local businesses.
-            Next.js, Glassmorphism, and dynamic performance."
+            &ldquo;Crafting exceptional digital experiences for local businesses.
+            Next.js, Glassmorphism, and dynamic performance.&rdquo;
           </p>
 
           <div className="space-y-0.5">
@@ -47,7 +54,11 @@ export default function HeroSection() {
           </div>
 
           <div className="pt-2 w-full max-w-[280px]">
-            <RainbowButton href="#services" icon={<ArrowUpRight className="w-3.5 h-3.5" />}>
+            <RainbowButton
+              href="#services"
+              icon={<ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />}
+              ariaLabel="View my services section"
+            >
               View My Services
             </RainbowButton>
           </div>
@@ -61,7 +72,10 @@ export default function HeroSection() {
           className="relative flex justify-center order-1 lg:order-2"
         >
           {/* Glow ring behind */}
-          <div className="absolute inset-0 rounded-full bg-gradient-to-b from-blue-500/20 via-purple-500/10 to-transparent blur-2xl scale-110 pointer-events-none" />
+          <div
+            className="absolute inset-0 rounded-full bg-gradient-to-b from-blue-500/20 via-purple-500/10 to-transparent blur-2xl scale-110 pointer-events-none"
+            aria-hidden="true"
+          />
 
           {/* Circle frame */}
           <div
@@ -75,21 +89,32 @@ export default function HeroSection() {
           >
             <Image
               src="/me.avif"
-              alt="Mubarak"
-              className="w-full h-full object-cover object-top scale-105"
-              priority={true}
+              alt="Mubarak Muhammad Hamisu — Web Developer based in Nigeria"
+              fill
+              sizes="(max-width: 768px) 240px, (max-width: 1200px) 300px, 360px"
+              className="object-cover object-top scale-105"
+              priority
             />
             {/* Subtle vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"
+              aria-hidden="true"
+            />
           </div>
 
           {/* Decal: top-right */}
-          <div className="absolute top-0 right-0 w-14 h-14 glass rounded-2xl flex items-center justify-center">
+          <div
+            className="absolute top-0 right-0 w-14 h-14 glass rounded-2xl flex items-center justify-center"
+            aria-hidden="true"
+          >
             <Sparkles className="text-white/30 w-6 h-6 animate-pulse" />
           </div>
 
           {/* Decal: bottom-left */}
-          <div className="absolute bottom-2 left-0 w-12 h-12 glass rounded-full flex items-center justify-center">
+          <div
+            className="absolute bottom-2 left-0 w-12 h-12 glass rounded-full flex items-center justify-center"
+            aria-hidden="true"
+          >
             <Cpu className="text-white/30 w-5 h-5" />
           </div>
         </motion.div>
@@ -106,7 +131,11 @@ export default function HeroSection() {
           </div>
 
           <div className="w-full max-w-[280px]">
-            <RainbowButton href="#contact" icon={<Phone className="w-3 h-3" />}>
+            <RainbowButton
+              href="#contact"
+              icon={<Phone className="w-3 h-3" aria-hidden="true" />}
+              ariaLabel="Book a consultation with Mubarak"
+            >
               Book a Consultation
             </RainbowButton>
           </div>

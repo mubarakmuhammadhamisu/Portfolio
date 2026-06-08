@@ -28,36 +28,52 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="container mx-auto px-6 py-20">
+    <section
+      id="services"
+      aria-labelledby="services-heading"
+      className="container mx-auto px-6 py-20"
+    >
       <div className="space-y-16">
         {/* Header */}
         <div className="flex flex-col items-center text-center space-y-4">
-          <span className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase">
+          <span
+            className="text-[10px] font-bold tracking-[0.3em] text-blue-400 uppercase"
+            aria-hidden="true"
+          >
             Expertise
           </span>
-          <h2 className="text-4xl md:text-5xl font-display font-semibold">
+          <h2
+            id="services-heading"
+            className="text-4xl md:text-5xl font-display font-semibold"
+          >
             Digital Solutions
           </h2>
-          <div className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500" />
+          <div
+            className="w-12 h-px bg-gradient-to-r from-blue-500 to-purple-500"
+            aria-hidden="true"
+          />
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 list-none p-0">
           {SERVICES.map((service, i) => (
-            <motion.div
-              key={i}
+            <motion.li
+              key={service.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.6 }}
               className="glass p-7 rounded-2xl hover:bg-white/[0.08] transition-all duration-300 group cursor-default"
             >
-              <service.icon className="w-8 h-8 text-blue-400 mb-5 group-hover:scale-110 transition-transform duration-300" />
+              <service.icon
+                className="w-8 h-8 text-blue-400 mb-5 group-hover:scale-110 transition-transform duration-300"
+                aria-hidden="true"
+              />
               <h3 className="text-base font-bold mb-2">{service.title}</h3>
               <p className="text-white/40 text-sm leading-relaxed">{service.desc}</p>
-            </motion.div>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
