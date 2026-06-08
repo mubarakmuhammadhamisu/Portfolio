@@ -18,7 +18,7 @@ const syne = Syne({
 const OG_IMAGE = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mubarak.dev"),
+  metadataBase: new URL("https://mubarakmhamisu.netlify.app"),
   title: {
     default: "Mubarak — Modern Web Developer | Portfolio",
     template: "%s | Mubarak",
