@@ -6,12 +6,20 @@ import { ExternalLink, ArrowUpRight } from "lucide-react";
 
 const PROJECTS = [
   {
-    title: "Local Bakery",
+    title: "Naija Kitchen",
     category: "Mobile App",
-    desc: "A mobile-first ordering experience for a Lagos bakery — smooth UI, real-time order tracking.",
+    desc: "A mobile-first food ordering experience — smooth UI, real-time order tracking.",
     image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
     tags: ["Next.js", "Tailwind", "Supabase"],
-    live: "#",
+    live: "https://naija-kitchen-mb.netlify.app",
+  },
+  {
+    title: "SimpleBank",
+    category: "Web App",
+    desc: "A clean fintech-style banking interface with account overview and transaction flows.",
+    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=1200&auto=format&fit=crop",
+    tags: ["Next.js", "Tailwind"],
+    live: "https://simplebank-mb.vercel.app",
   },
   {
     title: "Startup Lab",
@@ -27,7 +35,7 @@ const PROJECTS = [
     desc: "Full-stack e-learning platform with Paystack payments, video lessons, and certificates.",
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1200&auto=format&fit=crop",
     tags: ["Next.js", "Supabase", "Paystack"],
-    live: "#",
+    live: "https://titecx-mb.vercel.app",
   },
   {
     title: "Restaurant POS",
@@ -127,7 +135,10 @@ export default function PortfolioSection() {
                 <a
                   href={project.live}
                   className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/20 focus:opacity-100"
-                  aria-label={`View ${project.title} live — opens in current tab`}
+                  aria-label={`View ${project.title} live — opens in a new tab`}
+                  {...(project.live !== "#"
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : { "aria-disabled": true, tabIndex: -1 })}
                 >
                   <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </a>

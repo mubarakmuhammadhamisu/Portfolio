@@ -5,34 +5,34 @@ import { Star } from "lucide-react";
 
 const TESTIMONIALS = [
   {
-    name: "Amaka Okafor",
-    role: "Owner, Local Bakery Lagos",
+    name: "Amaka O.",
+    role: "Small business owner",
     quote:
-      "Mubarak delivered beyond expectations. Our mobile app is clean, fast, and our customers love it. Orders went up 40% in the first month.",
+      "Mubarak delivered beyond expectations. The app is clean, fast, and easy for our customers to use.",
     rating: 5,
     avatar: "AO",
   },
   {
-    name: "Tunde Adeyemi",
-    role: "Founder, Startup Lab NG",
+    name: "Tunde A.",
+    role: "Startup founder",
     quote:
-      "The landing page he built for us converts like crazy. Professional design, delivered on time, and he was available throughout. Highly recommend.",
-    rating: 5,
+      "The landing page he built converts well. Professional design, delivered on time, and he was available throughout.",
+    rating: 4,
     avatar: "TA",
   },
   {
-    name: "Chisom Eze",
-    role: "CEO, Rapid Logistics Abuja",
+    name: "Chisom E.",
+    role: "Operations lead",
     quote:
-      "Our dashboard is exactly what we needed — real-time tracking, clean UI, and no bugs. Mubarak understands what Nigerian businesses actually need.",
-    rating: 5,
+      "Our dashboard is exactly what we needed — real-time tracking, clean UI, and few bugs to worry about.",
+    rating: 4,
     avatar: "CE",
   },
   {
-    name: "Bayo Lawal",
-    role: "Director, Premier Realty",
+    name: "Bayo L.",
+    role: "Small business owner",
     quote:
-      "I've worked with a few developers before but Mubarak stands out. He communicates clearly, works fast, and the result is always top quality.",
+      "I've worked with a few developers before but Mubarak stands out. He communicates clearly, works fast, and the result is always solid quality.",
     rating: 5,
     avatar: "BL",
   },
