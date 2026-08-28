@@ -29,6 +29,8 @@ const CONTACT_LINKS = [
 export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const uid = useId();
 
@@ -52,14 +54,32 @@ export default function ContactSection() {
     return newErrors;
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    // TODO: wire up to Formspree / Resend / Supabase
-    setSent(true);
+    setServerError("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message.");
+      }
+      setSent(true);
+    } catch (err) {
+      setServerError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    } finally {
+      setSending(false);
+    }
   }
 
   const nameId = `${uid}-name`;
@@ -207,14 +227,21 @@ export default function ContactSection() {
                   )}
                 </div>
 
+                {serverError && (
+                  <p className="text-red-400 text-xs mb-3" role="alert">
+                    {serverError}
+                  </p>
+                )}
+
                 <div className="max-w-[200px]">
                   <RainbowButton
                     onClick={handleSubmit}
                     icon={<Send className="w-3 h-3" aria-hidden="true" />}
                     type="button"
                     ariaLabel="Send your message to Mubarak"
+                    disabled={sending}
                   >
-                    Send Message
+                    {sending ? "Sending..." : "Send Message"}
                   </RainbowButton>
                 </div>
               </div>

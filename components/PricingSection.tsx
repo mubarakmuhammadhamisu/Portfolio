@@ -9,56 +9,64 @@ const PLANS = [
     name: "Starter",
     price: "₦150,000",
     period: "one-time",
-    tagline: "Perfect for small businesses getting online.",
+    tagline: "For local businesses needing an immediate, professional presence.",
     features: [
-      "5-page responsive website",
-      "Mobile-first design",
-      "Contact form integration",
+      "1–3 custom static/dynamic pages",
+      "Mobile responsiveness",
       "Basic SEO setup",
-      "1 round of revisions",
-      "2 weeks delivery",
+      "Contact form integration",
+      "14 days of post-launch support",
     ],
     cta: "Get Started",
     href: "#contact",
     highlight: false,
   },
   {
-    name: "Professional",
-    price: "₦350,000",
-    period: "one-time",
-    tagline: "For businesses that need more power and polish.",
+    name: "Full-Stack",
+    price: "From ₦350,000",
+    period: "milestone-based",
+    tagline: "For startups needing web applications, custom UI/UX, or payment integration.",
     features: [
-      "Up to 10 pages",
-      "Custom UI/UX design",
-      "Supabase / database integration",
-      "Paystack payment setup",
-      "Admin dashboard",
-      "3 rounds of revisions",
-      "4 weeks delivery",
+      "Dynamic React / Next.js build",
+      "Database setup (Supabase)",
+      "Payment gateway integration (Paystack)",
+      "Admin backend setup",
+      "Core testing",
     ],
     cta: "Book a Call",
     href: "#contact",
     highlight: true,
   },
   {
-    name: "Premium",
+    name: "AI-Enhanced",
     price: "Custom",
     period: "quote",
-    tagline: "Full-scale platforms and complex web applications.",
+    tagline: "For startups needing intelligent, automated customer support or agents.",
     features: [
-      "Unlimited pages",
-      "Full-stack development",
-      "AI feature integration",
-      "Multi-role auth system",
-      "Performance optimisation",
-      "Ongoing maintenance plan",
-      "Priority support",
+      "Website integration",
+      "24/7 multimodal AI customer service agent",
+      "Or: workflow automation (Telegram / WhatsApp bots)",
+      "Lead capture & automated client communication",
     ],
     cta: "Let's Talk",
     href: "#contact",
     highlight: false,
   },
 ];
+
+const MAINTENANCE_ADDON = {
+  name: "Monthly Hands-Off Maintenance",
+  price: "Add-on",
+  period: "recurring",
+  tagline: "Keep your site running without lifting a finger.",
+  features: [
+    "Hosting management",
+    "Domain renewals",
+    "Monthly content edits",
+    "Security updates",
+    "Performance monitoring",
+  ],
+};
 
 export default function PricingSection() {
   return (
@@ -165,6 +173,32 @@ export default function PricingSection() {
             </motion.article>
           ))}
         </div>
+
+        {/* Maintenance add-on */}
+        <motion.article
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="glass rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 max-w-3xl mx-auto"
+          aria-label={`Add-on: ${MAINTENANCE_ADDON.name}`}
+        >
+          <div>
+            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/30 mb-1">
+              Add-On &middot; {MAINTENANCE_ADDON.price} &middot; {MAINTENANCE_ADDON.period}
+            </p>
+            <p className="text-sm font-semibold text-white/90 mb-1">{MAINTENANCE_ADDON.name}</p>
+            <p className="text-white/40 text-xs leading-relaxed">{MAINTENANCE_ADDON.tagline}</p>
+          </div>
+          <ul className="space-y-1.5 shrink-0" aria-label="Maintenance add-on features">
+            {MAINTENANCE_ADDON.features.map((feature) => (
+              <li key={feature} className="flex items-center gap-2">
+                <Check className="w-3 h-3 text-blue-400 shrink-0" aria-hidden="true" />
+                <span className="text-white/50 text-xs">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.article>
 
         {/* Footer note */}
         <p className="text-center text-white/20 text-[11px]">
