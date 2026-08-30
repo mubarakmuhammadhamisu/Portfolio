@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import ViewLiveButton from "./ViewLiveButton";
 
 const PROJECTS = [
   {
@@ -102,7 +103,6 @@ export default function PortfolioSection() {
         >
           {PROJECTS.map((project, i) => {
             const hasLiveLink = project.live !== "#";
-            const CardWrapper = hasLiveLink ? "a" : "div";
 
             return (
               <motion.li
@@ -113,17 +113,6 @@ export default function PortfolioSection() {
                 transition={{ delay: i * 0.08, duration: 0.55 }}
                 className="glass rounded-2xl overflow-hidden group hover:ring-1 hover:ring-white/15 transition-all duration-300"
               >
-                <CardWrapper
-                  {...(hasLiveLink
-                    ? {
-                        href: project.live,
-                        target: "_blank",
-                        rel: "noopener noreferrer",
-                        "aria-label": `View ${project.title} live — opens in a new tab`,
-                      }
-                    : {})}
-                  className="block"
-                >
                 {/* Image */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -145,16 +134,6 @@ export default function PortfolioSection() {
                   >
                     {project.category}
                   </span>
-
-                  {/* Live link indicator (visual only — whole card is the link) */}
-                  {hasLiveLink && (
-                    <span
-                      className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
-                      aria-hidden="true"
-                    >
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </span>
-                  )}
                 </div>
 
                 {/* Content */}
@@ -176,12 +155,21 @@ export default function PortfolioSection() {
                       </span>
                     ))}
                   </div>
+
+                  {/* View live button — only rendered when a real URL exists */}
+                  {hasLiveLink && (
+                    <ViewLiveButton
+                      href={project.live}
+                      projectName={project.title}
+                      className="mt-1"
+                    />
+                  )}
                 </div>
-                </CardWrapper>
               </motion.li>
             );
           })}
         </ul>
+
 
         {/* Bottom CTA */}
         <div className="flex justify-center">
