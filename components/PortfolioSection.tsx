@@ -100,72 +100,87 @@ export default function PortfolioSection() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 list-none p-0"
           aria-label="Portfolio projects"
         >
-          {PROJECTS.map((project, i) => (
-            <motion.li
-              key={project.title}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.55 }}
-              className="glass rounded-2xl overflow-hidden group hover:ring-1 hover:ring-white/15 transition-all duration-300"
-            >
-              {/* Image */}
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} — ${project.category} project screenshot`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  loading="lazy"
-                  className="object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"
-                  aria-hidden="true"
-                />
+          {PROJECTS.map((project, i) => {
+            const hasLiveLink = project.live !== "#";
+            const CardWrapper = hasLiveLink ? "a" : "div";
 
-                {/* Category badge */}
-                <span
-                  className="absolute top-3 left-3 text-[9px] font-bold tracking-[0.2em] uppercase bg-white/10 backdrop-blur-sm border border-white/10 px-2.5 py-1 rounded-full text-white/70"
+            return (
+              <motion.li
+                key={project.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.55 }}
+                className="glass rounded-2xl overflow-hidden group hover:ring-1 hover:ring-white/15 transition-all duration-300"
+              >
+                <CardWrapper
+                  {...(hasLiveLink
+                    ? {
+                        href: project.live,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        "aria-label": `View ${project.title} live — opens in a new tab`,
+                      }
+                    : {})}
+                  className="block"
                 >
-                  {project.category}
-                </span>
+                {/* Image */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} — ${project.category} project screenshot`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
+                    className="object-cover opacity-50 group-hover:opacity-75 group-hover:scale-105 transition-all duration-500"
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"
+                    aria-hidden="true"
+                  />
 
-                {/* Live link */}
-                <a
-                  href={project.live}
-                  className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/20 focus:opacity-100"
-                  aria-label={`View ${project.title} live — opens in a new tab`}
-                  {...(project.live !== "#"
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : { "aria-disabled": true, tabIndex: -1 })}
-                >
-                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                </a>
-              </div>
+                  {/* Category badge */}
+                  <span
+                    className="absolute top-3 left-3 text-[9px] font-bold tracking-[0.2em] uppercase bg-white/10 backdrop-blur-sm border border-white/10 px-2.5 py-1 rounded-full text-white/70"
+                  >
+                    {project.category}
+                  </span>
 
-              {/* Content */}
-              <div className="p-5 space-y-3">
-                <h3 className="text-base font-bold text-white">{project.title}</h3>
-                <p className="text-white/60 text-xs leading-relaxed">{project.desc}</p>
-
-                {/* Tags */}
-                <div
-                  className="flex flex-wrap gap-1.5 pt-1"
-                  aria-label={`Technologies: ${project.tags.join(", ")}`}
-                >
-                  {project.tags.map((tag) => (
+                  {/* Live link indicator (visual only — whole card is the link) */}
+                  {hasLiveLink && (
                     <span
-                      key={tag}
-                      className="text-[9px] font-bold tracking-wider uppercase text-blue-400/70 border border-blue-400/20 px-2 py-0.5 rounded-full"
+                      className="absolute top-3 right-3 w-8 h-8 glass rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                      aria-hidden="true"
                     >
-                      {tag}
+                      <ArrowUpRight className="w-3.5 h-3.5" />
                     </span>
-                  ))}
+                  )}
                 </div>
-              </div>
-            </motion.li>
-          ))}
+
+                {/* Content */}
+                <div className="p-5 space-y-3">
+                  <h3 className="text-base font-bold text-white">{project.title}</h3>
+                  <p className="text-white/60 text-xs leading-relaxed">{project.desc}</p>
+
+                  {/* Tags */}
+                  <div
+                    className="flex flex-wrap gap-1.5 pt-1"
+                    aria-label={`Technologies: ${project.tags.join(", ")}`}
+                  >
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-bold tracking-wider uppercase text-blue-400/70 border border-blue-400/20 px-2 py-0.5 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                </CardWrapper>
+              </motion.li>
+            );
+          })}
         </ul>
 
         {/* Bottom CTA */}
