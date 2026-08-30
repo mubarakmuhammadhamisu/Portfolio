@@ -61,12 +61,14 @@ export default function RainbowButton({
   `;
 
   if (href && !disabled) {
+    const isExternal = /^https?:\/\//.test(href);
     return (
       <a
         href={href}
         className={base}
         aria-label={ariaLabel}
         role="button"
+        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {inner}
       </a>

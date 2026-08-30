@@ -56,11 +56,18 @@ export default function Home() {
         </main>
 
         <footer
-          className="border-t border-white/5 py-8 px-6 flex items-center justify-between text-white/20 text-xs font-mono"
+          className="border-t border-white/5 py-8 px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/20 text-xs font-mono"
           role="contentinfo"
           aria-label="Site footer"
         >
           <span>© {new Date().getFullYear()} Mubarak</span>
+          <a
+            href="#contact"
+            className="text-white/40 hover:text-white transition-colors"
+            aria-label="Go to contact section to start a project"
+          >
+            Have a project in mind? Let&apos;s talk →
+          </a>
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -68,7 +75,6 @@ export default function Home() {
           >
             <Sparkles className="w-5 h-5 text-white/15" />
           </motion.div>
-          <span>Built with Next.js</span>
         </footer>
 
       </div>

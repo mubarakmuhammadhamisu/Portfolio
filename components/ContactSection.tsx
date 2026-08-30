@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Mail, MessageCircle, Send, MapPin } from "lucide-react";
+import { Mail, Send, MapPin } from "lucide-react";
 import { useState, useId } from "react";
 import RainbowButton from "./RainbowButton";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 const CONTACT_LINKS = [
   {
@@ -13,9 +14,9 @@ const CONTACT_LINKS = [
     href: "mailto:hamisumubarak447@gmail.com",
   },
   {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: "+234 916 608 2367",
+    icon: WhatsAppIcon,
+    label: "Message me directly",
+    value: "Chat on WhatsApp",
     href: "https://wa.me/2349166082367",
   },
   {
@@ -262,7 +263,11 @@ export default function ContactSection() {
                 key={link.label}
                 href={link.href}
                 className="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/[0.08] hover:ring-1 hover:ring-white/15 transition-all duration-300 group"
-                aria-label={`Contact via ${link.label}: ${link.value}`}
+                aria-label={
+                  link.label === "Message me directly"
+                    ? "Chat with Mubarak on WhatsApp — opens in a new tab"
+                    : `Contact via ${link.label}: ${link.value}`
+                }
                 {...(link.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 <div

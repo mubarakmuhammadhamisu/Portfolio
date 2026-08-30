@@ -1,0 +1,147 @@
+"use client";
+
+import { motion } from "motion/react";
+import { Sparkles, Cpu, ArrowUpRight, Phone } from "lucide-react";
+import RainbowButton from "./RainbowButton";
+import ProjectCard from "./ProjectCard";
+import Image from "next/image";
+
+export default function HeroSection() {
+  return (
+    <section
+      id="about"
+      aria-labelledby="hero-heading"
+      className="relative container mx-auto px-2 min-h-[680px] flex items-center justify-center pt-24 pb-12"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 xl:gap-16 items-center w-full max-w-7xl">
+
+        {/* ── LEFT: Text Info ── */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-7 order-2 lg:order-1"
+        >
+          <div className="space-y-2">
+            <h1
+              id="hero-heading"
+              className="text-[clamp(3.5rem,8vw,6rem)] font-display font-bold tracking-tighter leading-none"
+            >
+              MUBARAK
+            </h1>
+            <div className="space-y-0.5">
+              <p className="text-lg xl:text-xl font-medium text-white/90 leading-snug">
+                I build fast, production-ready
+              </p>
+              <p className="text-lg xl:text-xl font-medium text-white/90 leading-snug">
+                web platforms &amp; AI automation
+              </p>
+            </div>
+          </div>
+
+          <p className="text-white/50 max-w-[340px] leading-relaxed text-sm">
+            For startups and small businesses that need a site — or a system —
+            that actually works. Built with Next.js, shipped fast, and
+            engineered to scale.
+          </p>
+
+          <div className="pt-2 w-full max-w-[280px] space-y-3">
+            <RainbowButton
+              href="#contact"
+              icon={<Phone className="w-3.5 h-3.5" aria-hidden="true" />}
+              ariaLabel="Book a free consultation with Mubarak"
+            >
+              Book a Free Consultation
+            </RainbowButton>
+            <a
+              href="#services"
+              className="flex items-center justify-center gap-1.5 text-white/40 hover:text-white text-xs font-medium transition-colors py-1"
+              aria-label="View my services section"
+            >
+              See what I offer
+              <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
+            </a>
+          </div>
+        </motion.div>
+
+        {/* ── CENTER: Profile Photo ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative flex justify-center order-1 lg:order-2"
+        >
+          {/* Glow ring behind */}
+          <div
+            className="absolute inset-0 rounded-full bg-gradient-to-b from-blue-500/20 via-purple-500/10 to-transparent blur-2xl scale-110 pointer-events-none"
+            aria-hidden="true"
+          />
+
+          {/* Circle frame */}
+          <div
+            className="relative rounded-full overflow-hidden shadow-2xl"
+            style={{
+              width: "clamp(240px, 30vw, 360px)",
+              height: "clamp(240px, 30vw, 360px)",
+              border: "2px solid rgba(255,255,255,0.08)",
+              boxShadow: "0 0 60px rgba(80,100,255,0.15), inset 0 0 40px rgba(0,0,0,0.4)",
+            }}
+          >
+            <Image
+              src="/me.avif"
+              alt="Mubarak Muhammad Hamisu — Web Developer based in Nigeria"
+              fill
+              sizes="(max-width: 768px) 240px, (max-width: 1200px) 300px, 360px"
+              className="object-cover object-top scale-105"
+              priority
+            />
+            {/* Subtle vignette */}
+            <div
+              className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"
+              aria-hidden="true"
+            />
+          </div>
+
+          {/* Decal: top-right */}
+          <div
+            className="absolute top-0 right-0 w-14 h-14 glass rounded-2xl flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <Sparkles className="text-white/30 w-6 h-6 animate-pulse" />
+          </div>
+
+          {/* Decal: bottom-left */}
+          <div
+            className="absolute bottom-2 left-0 w-12 h-12 glass rounded-full flex items-center justify-center"
+            aria-hidden="true"
+          >
+            <Cpu className="text-white/30 w-5 h-5" />
+          </div>
+        </motion.div>
+
+        {/* ── RIGHT: Project Card + CTA ── */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="flex flex-col gap-5 lg:items-end order-3"
+        >
+          <div className="w-full max-w-xs">
+            <ProjectCard />
+          </div>
+
+          <div className="w-full max-w-[280px]">
+            <RainbowButton
+              href="https://wa.me/2349166082367"
+              icon={<Phone className="w-3 h-3" aria-hidden="true" />}
+              ariaLabel="Message Mubarak on WhatsApp — opens in a new tab"
+              variant="ghost"
+            >
+              Chat on WhatsApp
+            </RainbowButton>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
